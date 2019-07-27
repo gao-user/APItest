@@ -1,0 +1,94 @@
+{
+	"info": {
+		"_postman_id": "55e1eb8b-7016-433a-87f9-abe4d5a91cf4",
+		"name": "Using data files",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "postman-echo.com/{{path}}",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "88321d2a-ecca-41f1-8fa8-897272c50fc2",
+						"exec": [
+							"var jsonData = JSON.parse(responseBody);",
+							"",
+							"tests['Response has data value'] = jsonData.form.foo == data.value"
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"id": "83beaee4-8acd-453a-852f-43225761bf8f",
+						"exec": [
+							"pm.sendRequest(\"https://postman-echo.com/get\", function (err, response) {",
+							"    console.log(response.json());",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "foo",
+							"value": "{{value}}",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "postman-echo.com/{{path}}",
+					"host": [
+						"postman-echo",
+						"com"
+					],
+					"path": [
+						"{{path}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "weibo.keda.com/portal/login",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "e85916c0-4554-41bb-afdd-08fbd4cde6f6",
+						"exec": [
+							"tests['404']"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "weibo.kedacom.com/por",
+					"host": [
+						"weibo",
+						"kedacom",
+						"com"
+					],
+					"path": [
+						"por"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
